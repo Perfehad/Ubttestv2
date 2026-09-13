@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ҰБТ 2026 — IT Пробный тест №2</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="startScreen" class="screen start-screen">
+    <div class="brand"><div class="brand-mark">ҰБТ</div><div><b>Пробный тест №2</b><span>IT бағыты · Математика + Информатика</span></div></div>
+    <main class="start-card">
+      <div class="hero-badge">2026 · №2 НҰСҚА</div>
+      <h1>ҰБТ пробный тест №2</h1>
+      <p class="lead">Testcenter үлгісіне жақын жаттығу интерфейсі. 120 жаңа авторлық сұрақ, экрандық калькулятор, таймер, навигация және нәтиже талдауы.</p>
+      <div class="stats">
+        <div><strong>120</strong><span>сұрақ</span></div><div><strong>240</strong><span>минут</span></div><div><strong>5</strong><span>пән</span></div><div><strong>140</strong><span>макс. балл*</span></div>
+      </div>
+      <div class="subject-list">
+        <span>Қазақстан тарихы — 20</span><span>Оқу сауаттылығы — 10</span><span>Математикалық сауаттылық — 10</span><span>Математика — 40</span><span>Информатика — 40</span>
+      </div>
+      <label class="agree"><input type="checkbox" id="agree" /> <span>Тест ережесін түсіндім. Бұл ресми ҰБТ емес, дайындық тренажері.</span></label>
+      <button id="startBtn" class="primary" disabled>Тесті бастау</button>
+      <p class="fine">*Бұл тренажерде әр сұрақ 1 ұпай деп есептеледі; нәтиже 120 сұрақ бойынша көрсетіледі. Ресми ҰБТ-дағы балл қою механикасы бөлек болуы мүмкін.</p>
+    </main>
+  </div>
+
+  <div id="testScreen" class="screen hidden">
+    <header class="topbar">
+      <div class="brand compact"><div class="brand-mark">ҰБТ</div><div><b>Пробный тест №2</b><span id="subjectTop">Қазақстан тарихы</span></div></div>
+      <div class="top-actions"><button id="calcBtn" class="calc-open" type="button" title="Калькулятор"><span class="calc-emoji">🧮</span><span class="calc-label">Калькулятор</span></button><div class="timer" id="timer">04:00:00</div><button id="finishBtn" class="danger-outline">Аяқтау</button></div>
+    </header>
+    <div class="layout">
+      <aside class="sidebar" id="sidebar">
+        <div class="progress-head"><b>Сұрақтар</b><span id="answeredCount">0 / 120</span></div>
+        <div id="subjectNav"></div>
+      </aside>
+      <main class="workspace">
+        <div class="mobile-nav"><button id="toggleSidebar">☰ Сұрақтар</button><span id="mobileProgress">0/120</span></div>
+        <section class="question-card">
+          <div class="qmeta"><span id="qSubject"></span><span id="qNumber"></span></div>
+          <div id="passageBox" class="passage hidden"></div>
+          <h2 id="qText"></h2>
+          <img id="qImage" class="qimage hidden" alt="Тапсырма суреті" />
+          <div id="options" class="options"></div>
+          <label class="flag"><input type="checkbox" id="flagCheck" /> <span>Кейін қайта қарау үшін белгілеу</span></label>
+        </section>
+        <div class="nav-buttons"><button id="prevBtn" class="secondary">← Алдыңғы</button><button id="nextBtn" class="primary">Келесі →</button></div>
+      </main>
+    </div>
+  </div>
+
+  <div id="resultScreen" class="screen hidden result-screen">
+    <main class="result-card">
+      <div class="result-title"><span>Нәтиже</span><h1 id="scoreText">0 / 120</h1><p id="scoreMessage"></p></div>
+      <div id="subjectResults" class="result-grid"></div>
+      <div class="result-actions"><button id="reviewBtn" class="secondary">Қате жауаптарды қарау</button><button id="restartBtn" class="primary">Қайта тапсыру</button></div>
+      <div id="reviewList" class="review-list hidden"></div>
+    </main>
+  </div>
+
+
+  <div id="calcModal" class="calc-modal hidden" aria-hidden="true">
+    <div class="calculator" role="dialog" aria-label="Экрандық калькулятор">
+      <div class="calc-head"><b>Калькулятор</b><button id="calcClose" class="calc-close" type="button">×</button></div>
+      <div id="calcExpr" class="calc-expr">&nbsp;</div>
+      <input id="calcDisplay" class="calc-display" value="0" readonly aria-label="Калькулятор дисплейі" />
+      <div class="calc-grid">
+        <button data-calc="clear" class="calc-fn">C</button><button data-calc="back" class="calc-fn">⌫</button><button data-calc="(" class="calc-fn">(</button><button data-calc=")" class="calc-fn">)</button>
+        <button data-calc="7">7</button><button data-calc="8">8</button><button data-calc="9">9</button><button data-calc="/" class="calc-op">÷</button>
+        <button data-calc="4">4</button><button data-calc="5">5</button><button data-calc="6">6</button><button data-calc="*" class="calc-op">×</button>
+        <button data-calc="1">1</button><button data-calc="2">2</button><button data-calc="3">3</button><button data-calc="-" class="calc-op">−</button>
+        <button data-calc="0" class="calc-zero">0</button><button data-calc=".">.</button><button data-calc="+" class="calc-op">+</button>
+        <button data-calc="sqrt" class="calc-fn">√</button><button data-calc="square" class="calc-fn">x²</button><button data-calc="percent" class="calc-fn">%</button><button data-calc="equals" class="calc-eq">=</button>
+      </div>
+      <p class="calc-note">Тест кезінде есептеуге арналған экрандық калькулятор.</p>
+    </div>
+  </div>
+
+  <div id="confirmModal" class="modal hidden"><div class="modal-card"><h3>Тесті аяқтайсыз ба?</h3><p id="modalInfo"></p><div><button id="cancelFinish" class="secondary">Жалғастыру</button><button id="confirmFinish" class="danger">Аяқтау</button></div></div></div>
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
